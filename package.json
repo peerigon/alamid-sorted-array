@@ -28,13 +28,13 @@
   },
   "testling": {
     "harness" : "mocha",
-    "files": "test/sortedArray.test.js",
+    "files": "test/*.js",
     "browsers": {
-      "iexplore": [6, 7, 8, 9, 10],
-      "chrome": [15, 20, 25, "canary"],
-      "firefox": [15, 20, 22, "nightly"],
+      "iexplore": [7, 8, 9, 10],
+      "chrome": [20, 25, "canary"],
+      "firefox": [20, 22, "nightly"],
       "safari": [5, 6],
-      "opera": [10, 11, 12, "next"],
+      "opera": [11, 12, "next"],
       "iphone": [6],
       "ipad": [6],
       "android-browser": [4.2]
