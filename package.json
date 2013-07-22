@@ -1,0 +1,45 @@
+{
+  "name": "alamid-sorted-array",
+  "version": "0.1.0",
+  "description": "Turns an array into a sorted array",
+  "main": "./lib/sortedArray.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha -R spec"
+  },
+  "keywords": [
+    "array",
+    "list",
+    "sequence",
+    "sorted",
+    "binary",
+    "search",
+    "sort",
+    "order",
+    "compare"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "1.x",
+    "chai": "1.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peerigon/alamid-sorted-array.git"
+  },
+  "testling": {
+    "harness" : "mocha",
+    "files": "test/sortedArray.test.js",
+    "browsers": {
+      "iexplore": [6, 7, 8, 9, 10],
+      "chrome": [15, 20, 25, "canary"],
+      "firefox": [15, 20, 22, "nightly"],
+      "safari": [5, 6],
+      "opera": [10, 11, 12, "next"],
+      "iphone": [6],
+      "ipad": [6],
+      "android-browser": [4.2]
+    }
+  },
+  "author": "peerigon <developers@peerigon.com>",
+  "license": "MIT"
+}
