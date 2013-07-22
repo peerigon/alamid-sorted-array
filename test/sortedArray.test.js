@@ -1,7 +1,7 @@
 "use strict";
 
 var chai = require("chai"),
-    sortedArray = require("../" + require("../package.json").main),
+    sortedArray = require("../lib/sortedArray.js"),
     expect = chai.expect;
 
 describe("sortedArray()", function () {
