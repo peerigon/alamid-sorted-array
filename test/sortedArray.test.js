@@ -81,6 +81,21 @@ describe("sortedArray()", function () {
 
     });
 
+    describe(".splice()", function () {
+
+        it("should remove the elements at the given index", function () {
+            arr.push(3, 5, 6);
+            arr.splice(1, 3);
+            expect(arr.slice()).to.eql([1, 5, 6]);
+        });
+
+        it("should add the additional elements at the index specified by the current order", function () {
+            arr.splice(0, 0, 3, 5, 6);
+            expect(arr.slice()).to.eql([1, 2, 3, 4, 5, 6]);
+        });
+
+    });
+
     describe(".indexOf()", function () {
 
         it("should work like Array.prototype.indexOf", function () {
@@ -179,6 +194,14 @@ describe("sortedArray()", function () {
             expect(arr.findIndexFor(4)).to.equal(2);
             expect(arr.findIndexFor(5)).to.equal(3);
             expect(arr.findIndexFor(6)).to.equal(3);
+        });
+
+    });
+
+    describe(".toString()", function () {
+
+        it("should return the same result as the original array", function () {
+            expect(arr.toString()).to.equal([1, 2, 4].toString());
         });
 
     });
