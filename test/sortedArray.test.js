@@ -131,6 +131,16 @@ describe("sortedArray()", function () {
 
     describe(".reverse()", function () {
 
+        function evenOdd(a, b) {
+            var compared = a % 2 - b % 2;
+
+            if (compared === 0) { // both are even or odd
+                return a - b;
+            } else {
+                return compared;
+            }
+        }
+
         it("should work like Array.prototype.reverse()", function () {
             arr.reverse();
             expect(arr.slice()).to.eql([4, 2, 1]);
@@ -145,13 +155,30 @@ describe("sortedArray()", function () {
             expect(arr.slice()).to.eql([0, 1, 2, 3, 4]);
         });
 
+        it("should reset if a different compare function is used", function () {
+            arr.reverse();
+            arr.sort(evenOdd);
+            arr.push(3, 5, 6, 7);
+            expect(arr.slice()).to.eql([2, 4, 6, 1, 3, 5, 7]);
+            arr.reverse();
+            expect(arr.slice()).to.eql([7, 5, 3, 1, 6, 4, 2]);
+            arr.push(0);
+            expect(arr.slice()).to.eql([7, 5, 3, 1, 6, 4, 2, 0]);
+        });
+
     });
 
     describe(".findIndexFor()", function () {
 
         it("should return the insertion index for the given element", function () {
-            expect(arr.findIndexFor(3)).to.equal(2);
+            // arr = [1, 2, 4]
+            expect(arr.findIndexFor(-1)).to.equal(0);
+            expect(arr.findIndexFor(0)).to.equal(0);
             expect(arr.findIndexFor(1)).to.equal(0);
+            expect(arr.findIndexFor(3)).to.equal(2);
+            expect(arr.findIndexFor(4)).to.equal(2);
+            expect(arr.findIndexFor(5)).to.equal(3);
+            expect(arr.findIndexFor(6)).to.equal(3);
         });
 
     });

@@ -1,6 +1,6 @@
 {
   "name": "alamid-sorted-array",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Turns an array into a sorted array",
   "main": "./lib/sortedArray.js",
   "scripts": {
@@ -17,7 +17,9 @@
     "order",
     "compare"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "binary-search": "1.x"
+  },
   "devDependencies": {
     "mocha": "1.x",
     "chai": "1.x"
