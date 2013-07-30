@@ -11,6 +11,10 @@ describe("sortedArray()", function () {
         return b - a;
     }
 
+    function ascending(a, b) {
+        return a - b;
+    }
+
     beforeEach(function () {
         arr = sortedArray([1, 2, 4]);
     });
@@ -30,10 +34,21 @@ describe("sortedArray()", function () {
             arr = [];
             expect(sortedArray(arr)).to.equal(arr);
         });
+        
+        describe("with length > 0 and a comparator", function () {
 
-        describe("with length > 0", function () {
+            it("should sort the array by the given comparator", function () {
+                arr = [5, 1, 2];
+                arr.comparator = descending;
+                arr = sortedArray(arr);
+                expect(arr.slice()).to.eql([5, 2, 1]);
+            });
 
-            it("should sort the array by the default compare function", function () {
+        });
+
+        describe("with length > 0 and no comparator", function () {
+
+            it("should sort the array by the default comparator", function () {
                 arr = sortedArray([5, 2, 1]);
                 expect(arr.slice()).to.eql([1, 2, 5]);
             });
@@ -42,15 +57,11 @@ describe("sortedArray()", function () {
 
     });
 
-    describe("when passing an array and a compare function", function () {
+    describe("when passing an array and a comparator", function () {
 
-        function compare(a, b) {
-            return a - b;
-        }
-
-        it("should NOT sort the array by default", function () {
-            arr = sortedArray([5, 4, 1, 2], compare);
-            expect(arr.slice()).to.eql([5, 4, 1, 2]);
+        it("should sort the array by default", function () {
+            arr = sortedArray([5, 4, 1, 2], ascending);
+            expect(arr.slice()).to.eql([1, 2, 4, 5]);
         });
 
     });
@@ -107,20 +118,20 @@ describe("sortedArray()", function () {
 
     describe(".sort()", function () {
 
-        it("should sort the array by the default compare function", function () {
+        it("should sort the array by the default comparator", function () {
             arr[3] = 2;
             arr.sort();
             expect(arr.slice()).to.eql([1, 2, 2, 4]);
         });
 
-        describe("when passing a compare function", function () {
+        describe("when passing a comparator", function () {
 
-            it("should sort the array by the passed compare function", function () {
+            it("should sort the array by the passed comparator", function () {
                 arr.sort(descending);
                 expect(arr.slice()).to.eql([4, 2, 1]);
             });
 
-            it("should order all subsequent new elements by the passed compare function", function () {
+            it("should order all subsequent new elements by the passed comparator", function () {
                 arr.sort(descending);
                 arr.push(3);
                 expect(arr.slice()).to.eql([4, 3, 2, 1]);
@@ -128,14 +139,14 @@ describe("sortedArray()", function () {
 
         });
 
-        describe("when a compare function has been set", function () {
+        describe("when a comparator has been set", function () {
 
             beforeEach(function () {
                 arr.sort(descending);
                 arr[arr.length] = 5;
             });
 
-            it("should sort the array by the previously set compare function", function () {
+            it("should sort the array by the previously set comparator", function () {
                 arr.sort();
                 expect(arr.slice()).to.eql([5, 4, 2, 1]);
             });
@@ -161,7 +172,7 @@ describe("sortedArray()", function () {
             expect(arr.slice()).to.eql([4, 2, 1]);
         });
 
-        it("should invert the compare function so the original order is preserved", function () {
+        it("should invert the comparator so the original order is preserved", function () {
             arr.reverse();
             arr.push(3);
             expect(arr.slice()).to.eql([4, 3, 2, 1]);
@@ -170,7 +181,7 @@ describe("sortedArray()", function () {
             expect(arr.slice()).to.eql([0, 1, 2, 3, 4]);
         });
 
-        it("should reset if a different compare function is used", function () {
+        it("should reset if a different comparator is used", function () {
             arr.reverse();
             arr.sort(evenOdd);
             arr.push(3, 5, 6, 7);
