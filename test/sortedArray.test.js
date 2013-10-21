@@ -83,7 +83,7 @@ describe("sortedArray()", function () {
 
         describe("when passing several arguments", function () {
 
-            it("should insert all new values at their specific index", function () {
+            it("should insert all new values at their sorted index", function () {
                 arr.push(3, 0, 5);
                 expect(arr.slice()).to.eql([0, 1, 2, 3, 4, 5]);
             });
@@ -108,6 +108,12 @@ describe("sortedArray()", function () {
             expect(arr.slice()).to.eql([1, 5, 6]);
         });
 
+        it("should return removed elements just like Array.prototype.splice", function () {
+            arr.push(3, 5, 6);
+            expect(arr.splice(1, 3)).to.eql([2, 3, 4]);
+            expect(arr.splice(1, 0)).to.eql([]);
+        });
+
         it("should add the additional elements at the index specified by the current order", function () {
             arr.splice(0, 0, 3, 5, 6);
             expect(arr.slice()).to.eql([1, 2, 3, 4, 5, 6]);
@@ -120,6 +126,8 @@ describe("sortedArray()", function () {
         it("should work like Array.prototype.indexOf", function () {
             expect(arr.indexOf(2)).to.equal(1);
             expect(arr.indexOf(100)).to.equal(-1);
+            expect(arr.indexOf(2, 2)).to.equal(-1);
+            expect(arr.indexOf(2, -100)).to.equal(1);
         });
 
     });
