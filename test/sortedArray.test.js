@@ -15,6 +15,14 @@ describe("sortedArray()", function () {
         return a - b;
     }
 
+    function firstLetterLexically(a, b) {
+        return a.charAt(0).localeCompare(b.charAt(0));
+    }
+
+    function byLengthDesc(a, b) {
+        return b.length - a.length;
+    }
+
     beforeEach(function () {
         arr = sortedArray([1, 2, 4]);
     });
@@ -57,11 +65,11 @@ describe("sortedArray()", function () {
 
     });
 
-    describe("when passing an array and a comparator", function () {
+    describe("when passing an array and multiple comparators", function () {
 
         it("should sort the array by default", function () {
-            arr = sortedArray([5, 4, 1, 2], ascending);
-            expect(arr.slice()).to.eql([1, 2, 4, 5]);
+            arr = sortedArray(["bb", "a", "cc", "b", "aa", "c"], firstLetterLexically, byLengthDesc);
+            expect(arr.slice()).to.eql(["aa", "a", "bb", "b", "cc", "c"]);
         });
 
     });
@@ -124,31 +132,37 @@ describe("sortedArray()", function () {
             expect(arr.slice()).to.eql([1, 2, 2, 4]);
         });
 
-        describe("when passing a comparator", function () {
+        describe("when passing comparators", function () {
 
-            it("should sort the array by the passed comparator", function () {
-                arr.sort(descending);
-                expect(arr.slice()).to.eql([4, 2, 1]);
+            beforeEach(function () {
+                arr = sortedArray(["bb", "a", "cc", "b", "aa", "c"]);
+            });
+
+            it("should sort the array by all comparators in order", function () {
+                arr = sortedArray(["bb", "a", "cc", "b", "aa", "c"]);
+                arr.sort(firstLetterLexically, byLengthDesc);
+                expect(arr.slice()).to.eql(["aa", "a", "bb", "b", "cc", "c"]);
             });
 
             it("should order all subsequent new elements by the passed comparator", function () {
-                arr.sort(descending);
-                arr.push(3);
-                expect(arr.slice()).to.eql([4, 3, 2, 1]);
+                arr.sort(firstLetterLexically, byLengthDesc);
+                arr.push("aaa");
+                expect(arr.slice()).to.eql(["aaa", "aa", "a", "bb", "b", "cc", "c"]);
             });
 
         });
 
-        describe("when a comparator has been set", function () {
+        describe("when comparators have been set", function () {
 
             beforeEach(function () {
-                arr.sort(descending);
-                arr[arr.length] = 5;
+                arr = sortedArray(["bb", "a", "cc", "b", "aa", "c"]);
+                arr.sort(firstLetterLexically, byLengthDesc);
+                arr[arr.length] = "aaa";
             });
 
             it("should sort the array by the previously set comparator", function () {
                 arr.sort();
-                expect(arr.slice()).to.eql([5, 4, 2, 1]);
+                expect(arr.slice()).to.eql(["aaa", "aa", "a", "bb", "b", "cc", "c"]);
             });
 
         });
