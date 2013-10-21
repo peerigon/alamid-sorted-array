@@ -194,17 +194,17 @@ describe("sortedArray()", function () {
 
     });
 
-    describe(".findIndexFor()", function () {
+    describe(".sortedIndex()", function () {
 
         it("should return the insertion index for the given element", function () {
             // arr = [1, 2, 4]
-            expect(arr.findIndexFor(-1)).to.equal(0);
-            expect(arr.findIndexFor(0)).to.equal(0);
-            expect(arr.findIndexFor(1)).to.equal(0);
-            expect(arr.findIndexFor(3)).to.equal(2);
-            expect(arr.findIndexFor(4)).to.equal(2);
-            expect(arr.findIndexFor(5)).to.equal(3);
-            expect(arr.findIndexFor(6)).to.equal(3);
+            expect(arr.sortedIndex(-1)).to.equal(0);
+            expect(arr.sortedIndex(0)).to.equal(0);
+            expect(arr.sortedIndex(1)).to.equal(0);
+            expect(arr.sortedIndex(3)).to.equal(2);
+            expect(arr.sortedIndex(4)).to.equal(2);
+            expect(arr.sortedIndex(5)).to.equal(3);
+            expect(arr.sortedIndex(6)).to.equal(3);
         });
 
     });
